@@ -31,4 +31,4 @@ Globals::$run_time_decimal = (int) $decimal[1];
 Globals::$run_stamp = date('Y-m-d_H.i.s', Globals::$run_time) . '.' . Globals::$run_time_decimal;
 
 require_once(DIR_COM . DS . 'functions.php');
-require_once(DIR_COM . DS . 'logger.php');
+require_once(DIR_COM . DS . 'class_logger.php');

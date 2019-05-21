@@ -50,12 +50,15 @@ class Logger
         fwrite($this->get_file(), $data);
     }
 
-    function close()
-    {
-        if (!is_null($this->file))
-        {
-            fclose($this->file);
-        }
-    }
+	public static function close()
+	{
+		if (!is_null(self::$instance))
+		{
+			if (!is_null(self::$instance->file))
+            {
+                fclose(self::$instance->file);
+            }
+		}
+	}
 
 }

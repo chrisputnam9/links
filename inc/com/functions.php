@@ -46,20 +46,17 @@ function _log($data, $line_ending=true, $stamp_lines=true)
     }
 }
 
-function _shutdown()
-{
-    if (Config::$logging)
-    {
-        $logger = Logger::instance();
-        $logger->close();
-    }
-
-    die;
-}
-
 function _stamp()
 {
     $microtime = explode(' ', microtime());
     $decimal = explode('.', $microtime[0]);
     return date('Y-m-d H:i:s', $microtime[1]) . ' ' . $decimal[1];
+}
+
+function _shutdown()
+{
+    Logger::close();
+    Cloudflare::close();
+
+    die;
 }

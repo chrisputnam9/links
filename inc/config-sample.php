@@ -31,8 +31,13 @@ error_reporting(E_NONE);
 //     implode($string);
 # Config::$base_digits = '';
 
-// TODO Optional - set your cloudflare API key
+// TODO Optional - set your cloudflare API info
+// Email - associated with your account
+# Config::$cloudflare_api_email='';
+// Key - Generate on "My Account" page
 # Config::$cloudflare_api_key='';
+// Zone Identifier - from Overview of domain
+# Config::$cloudflare_api_zone='';
 
 // TODO Set logging:
 // 0 - off

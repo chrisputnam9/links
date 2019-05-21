@@ -23,7 +23,9 @@ class Config {
     ];
     static $auth_token = '';
     static $base_digits = '';
+    static $cloudflare_api_email = '';
     static $cloudflare_api_key = '';
+    static $cloudflare_api_zone = '';
     static $logging = 0;
     static $logins = [];
     static $redirect_code = 302;

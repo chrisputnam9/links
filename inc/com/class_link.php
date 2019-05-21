@@ -1,5 +1,6 @@
 <?php
 
+require_once(DIR_COM . DS . 'class_cloudflare.php');
 require_once(DIR_COM . DS . 'db.php');
 
 class Link
@@ -122,6 +123,10 @@ class Link
         //  - update inserted row
         $stmt = $db->prepare('UPDATE link SET slug=? WHERE id=?');
         $stmt->execute([$this->slug, $this->id]);
+
+        // Clear CF cache for this URL (would have 404-d before)
+        // $cf = Cloudflare::instance();
+        // $result = $cf->run('');
 
         //  - return inserted data
         return $this;
