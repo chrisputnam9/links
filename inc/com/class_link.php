@@ -124,9 +124,10 @@ class Link
         $stmt = $db->prepare('UPDATE link SET slug=? WHERE id=?');
         $stmt->execute([$this->slug, $this->id]);
 
-        // Clear CF cache for this URL (would have 404-d before)
+        // Clear CF cache for this URL (would have 404-d before, could have been cached as such)
         // $cf = Cloudflare::instance();
-        // $result = $cf->run('');
+        // $result = $cf->run('purge_cache', [ Config::$url . '/' . $this->slug ]);
+        // die("<pre>".print_r($result,true)."</pre>");
 
         //  - return inserted data
         return $this;

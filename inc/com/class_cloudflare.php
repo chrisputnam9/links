@@ -3,7 +3,7 @@
 class Cloudflare
 {
     // CF details
-    protected static $base_url = '';
+    protected $base_url = 'https://api.cloudflare.com/client/v4/zones/';
 
     // Singleton
     protected static $instance = null;
@@ -12,9 +12,14 @@ class Cloudflare
     {
         if (is_null(self::$instance))
         {
-            self::$instance = new Logger();
+            self::$instance = new Cloudflare();
         }
         return self::$instance;
+    }
+
+    public function __construct()
+    {
+        $this->base_url = $this->base_url . Config::$cloudflare_api_zone . '/';
     }
 
     protected $curl = null;
@@ -30,6 +35,11 @@ class Cloudflare
 				CURLOPT_CONNECTTIMEOUT => 30,
 				CURLOPT_TIMEOUT => 60,
 				CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTPHEADER => [
+                    "X-Auth-Email: " . Config::$cloudflare_api_email,
+                    "X-Auth-Key: " . Config::$cloudflare_api_key,
+                    "Content-Type: application/json",
+                ],
             ]);
 
         }
@@ -37,14 +47,16 @@ class Cloudflare
         return $this->curl;
     }
 
-    public function run($method)
+    public function run($method, $data=[])
     {
-
-		curl_setopt_array($this->curl, [
-			CURLOPT_URL => $url,
-			CURLOPT_HTTPHEADER,
+        $curl = $this->get_curl();
+		curl_setopt_array($curl, [
+			CURLOPT_URL => $this->base_url . $method,
+            CURLOPT_POST => (is_array($data) and count($data) > 0),
+            CURLOPT_POSTFIELDS => $data,
 		]);
-
+        
+        return curl_exec($curl);
     }
 
 	public static function close()
