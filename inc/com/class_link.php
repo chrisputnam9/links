@@ -125,9 +125,12 @@ class Link
         $stmt->execute([$this->slug, $this->id]);
 
         // Clear CF cache for this URL (would have 404-d before, could have been cached as such)
-        // $cf = Cloudflare::instance();
-        // $result = $cf->run('purge_cache', [ Config::$url . '/' . $this->slug ]);
-        // die("<pre>".print_r($result,true)."</pre>");
+        $_url = Config::$url . '/' . $this->slug;
+        _log('Clearing CF cache for ' . $_url);
+
+        $cf = Cloudflare::instance();
+        $result = $cf->run('purge_cache', [ 'files' => [ $_url ] ]);
+        _log($result);
 
         //  - return inserted data
         return $this;

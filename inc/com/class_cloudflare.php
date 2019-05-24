@@ -53,9 +53,9 @@ class Cloudflare
 		curl_setopt_array($curl, [
 			CURLOPT_URL => $this->base_url . $method,
             CURLOPT_POST => (is_array($data) and count($data) > 0),
-            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_POSTFIELDS => json_encode($data),
 		]);
-        
+
         return curl_exec($curl);
     }
 

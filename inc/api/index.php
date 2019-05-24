@@ -28,7 +28,6 @@ try {
     ob_end_flush();
 
 } catch (Error | Exception $e){
-    die($e->getMessage());
     _error($e);
 }
 
