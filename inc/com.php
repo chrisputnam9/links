@@ -13,9 +13,15 @@ define('DIR_LOG', DIR_INC . DS . 'log');
 
 define('DIR_PUB', DIR_ROOT . DS . 'pub');
 
+// Composer Autoloader
+require_once DIR_INC . DS . "vendor" . DS . "autoload.php";
+
 // Configuration
 require_once(DIR_INC . DS . 'config-default.php');
 require_once(DIR_INC . DS . 'config.php');
+
+// Initialize Sentry ASAP with config
+\Sentry\init(Config::$sentry);
 
 // Run Time Settings
 date_default_timezone_set(Config::$timezone);

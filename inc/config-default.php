@@ -11,7 +11,7 @@
 // Error Options
 ini_set('display_errors', 0);
 ini_set('html_errors', 1);
-error_reporting(E_NONE);
+error_reporting(0);
 
 // Default config
 class Config {
@@ -20,6 +20,7 @@ class Config {
         'image/.*', // Any image
         'text/.*', // Any text
         'video/.*', // Any video
+        'application/pdf', // PDF
     ];
     static $auth_token = '';
     static $base_digits = '';
@@ -31,4 +32,5 @@ class Config {
     static $redirect_code = 302;
     static $timezone = 'US/Eastern';
     static $url = '';
+    static $sentry = [];
 };

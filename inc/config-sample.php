@@ -56,3 +56,8 @@ error_reporting(E_NONE);
 
 // TODO Set base URL you're using
 # Config::$url = 'https://cmp.onl';
+
+// TODO Set Sentry config if using that
+# Config::$sentry = [
+#    'dsn' => '...',
+# ];
